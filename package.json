@@ -3,6 +3,7 @@
   "version": "4.1.0",
   "description": "Customizable and hackable json-validator and json-schema utilities for traversal, data generation and validation",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "mocha --recursive -R dot 'test/**/*.test.js'",
     "test-integration": "mocha --recursive -R spec 'test/integration/**/*.test.js'",
@@ -27,6 +28,9 @@
   },
   "homepage": "https://github.com/sagold/json-schema-library",
   "devDependencies": {
+    "@types/node": "^12.12.14",
+    "@typescript-eslint/eslint-plugin": "^2.10.0",
+    "@typescript-eslint/parser": "^2.10.0",
     "chai": "^3.5.0",
     "chalk": "^2.3.0",
     "eslint": "^6.6.0",
@@ -35,6 +39,7 @@
     "mocha": "^3.1.2",
     "nyc": "^10.0.0",
     "pre-push": "^0.1.1",
+    "typescript": "^3.7.3",
     "watch": "^1.0.1",
     "webpack": "^3.8.1",
     "webpack-bundle-size-analyzer": "^2.7.0"

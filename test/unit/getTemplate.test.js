@@ -163,7 +163,6 @@ describe("getTemplate", () => {
 
 
             it("should follow $ref once", () => {
-
                 core.setSchema({
                     type: "object",
                     properties: {
@@ -171,9 +170,7 @@ describe("getTemplate", () => {
                         nodes: {
                             type: "array",
                             minItems: 1,
-                            items: {
-                                $ref: "#"
-                            }
+                            items: { $ref: "#" }
                         }
                     }
                 });
@@ -185,6 +182,58 @@ describe("getTemplate", () => {
                         {
                             value: "node",
                             nodes: []
+                        }
+                    ]
+                });
+            });
+
+
+            it.only("should respect input data for $ref-recursion", () => {
+                core.setSchema({
+                    type: "object",
+                    properties: {
+                        value: { type: "string", default: "node" },
+                        nodes: {
+                            type: "array",
+                            minItems: 1,
+                            items: { $ref: "#" }
+                        }
+                    }
+                });
+                const res = core.getTemplate({
+                    value: "node01",
+                    nodes: [
+                        {
+                            nodes: []
+                        },
+                        {
+                            value: "node03",
+                            nodes: [
+                                {
+                                    nodes: []
+                                }
+                            ]
+                        }
+                    ]
+                });
+
+                console.log("RESULT", JSON.stringify(res, null, 2));
+
+                expect(res).to.deep.equal({
+                    value: "node01",
+                    nodes: [
+                        {
+                            value: "node",
+                            nodes: []
+                        },
+                        {
+                            value: "node03",
+                            nodes: [
+                                {
+                                    value: "node",
+                                    nodes: []
+                                }
+                            ]
                         }
                     ]
                 });
